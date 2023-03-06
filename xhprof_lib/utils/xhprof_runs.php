@@ -410,7 +410,7 @@ CREATE TABLE `details` (
 	        //This code has not been tested
 		    if (isset($_xhprof['savepost']) && $_xhprof['savepost'])
 			{
-				$sql['post'] = $this->db->escape(serialize($_POST));
+				$sql['post'] = $this->db->escape(serialize(json_decode(file_get_contents('php://input'), true) ?: $_POST));
 			} else {
 				$sql['post'] = $this->db->escape(serialize(array("Skipped" => "Post data omitted by rule")));
 			}
@@ -421,7 +421,7 @@ CREATE TABLE `details` (
 	        //This code has not been tested
 		    if (isset($_xhprof['savepost']) && $_xhprof['savepost'])
 			{
-				$sql['post'] = $this->db->escape(json_encode($_POST));
+				$sql['post'] = $this->db->escape(json_encode(json_decode(file_get_contents('php://input'), true) ?: $_POST));
 			} else {
 				$sql['post'] = $this->db->escape(json_encode(array("Skipped" => "Post data omitted by rule")));
 			}
